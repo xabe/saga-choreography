@@ -1,0 +1,21 @@
+{
+  "name": "MessageEnvelopeStatus",
+  "namespace": "com.xabe.avro.v1",
+  "subject": "status.v1-value",
+  "type": "record",
+  "fields": [
+    {
+      "name": "metadata",
+      "type": "com.xabe.avro.v1.Metadata",
+      "doc": "PIPE specific metadata."
+    },
+    {
+      "name": "payload",
+      "doc": "Envelope's content. It could be any command.",
+      "type": [
+        "PaymentCreatedEvent",
+        "ShippingCreatedEvent"
+      ]
+    }
+  ]
+}

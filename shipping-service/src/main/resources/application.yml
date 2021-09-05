@@ -1,0 +1,132 @@
+# Configuration file
+# key = value
+
+quarkus:
+  kafka:
+    devservices:
+      enabled: false
+  test:
+    native-image-profile: test
+  vertx:
+    prefer-native-transport: true
+  native:
+    additional-build-args:
+      - "-H:+PrintClassInitialization"
+      - "-H:+ReportExceptionStackTraces"
+      - "-H:GenerateDebugInfo=1"
+      - "-H:+StackTrace"
+      - "-H:ResourceConfigurationFiles=resources-config.json"
+      - "-H:ReflectionConfigurationFiles=reflection-config.json"
+  package:
+    main-class: com.xabe.orchestration.shipping.App
+  log:
+    console:
+      enable: true
+      level: DEBUG
+    category:
+      io.quarkus:
+        level: INFO
+      org.jboss.resteasy:
+        level: INFO
+      io.smallrye.reactive.messaging.kafka:
+        level: DEBUG
+      com.xabe:
+        level: DEBUG
+  application:
+    name: shipping-service
+  banner:
+    enabled: false
+  http:
+    test-port: 8003
+    port: 8003
+    root-path: /api
+  datasource:
+    db-kind: postgresql
+    username: myuser
+    password: mypassword
+    reactive:
+      url: postgresql://localhost:5434/shipments
+  hibernate-orm:
+    database:
+      generation: drop-and-create
+    log:
+      sql: true
+
+kafka:
+  bootstrap:
+    servers:
+      - localhost:9092
+
+mp:
+  messaging:
+    incoming:
+      shipments:
+        connector: smallrye-kafka
+        topic: shipments.v1
+        key:
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value:
+          deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+        schema:
+          reflection: false
+          registry:
+            url: http://localhost:8081
+        request:
+          timeout:
+            ms: 30000
+        specific:
+          avro:
+            reader: true
+        use:
+          latest:
+            version: true
+        auto:
+          offset:
+            reset: latest
+          register:
+            schemas: false
+          commit:
+            interval:
+              ms: 100
+        group:
+          id: shipments-consumer-group
+        enable:
+          auto:
+            commit: false
+        partitions: 1
+    outgoing:
+      status:
+        connector: smallrye-kafka
+        topic: status.v1
+        acks: all
+        key:
+          serializer: org.apache.kafka.common.serialization.StringSerializer
+        value:
+          serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        schema:
+          reflection: false
+          registry:
+            url: http://localhost:8081
+        request:
+          timeout:
+            ms: 30000
+        use:
+          latest:
+            version: true
+        max-inflight-messages: 5
+        compression:
+          type: none
+        enable:
+          idempotence: true
+        retries: 10
+        max:
+          block:
+            ms: 1000
+        linger:
+          ms: 20
+        batch:
+          size: 32768
+        auto:
+          register:
+            schemas: false
+        partition: -1

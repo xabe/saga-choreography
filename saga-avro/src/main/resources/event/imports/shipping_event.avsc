@@ -1,0 +1,117 @@
+[
+  {
+    "name": "ShippingOperationStatus",
+    "namespace": "com.xabe.avro.v1",
+    "type": "enum",
+    "symbols": [
+      "SUCCESS",
+      "ERROR"
+    ]
+  },
+  {
+    "name": "Shipping",
+    "namespace": "com.xabe.avro.v1",
+    "type": "record",
+    "fields": [
+      {
+        "name": "id",
+        "type": "long"
+      },
+      {
+        "name": "purchase_id",
+        "type": "string"
+      },
+      {
+        "name": "user_id",
+        "type": "string"
+      },
+      {
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "name": "price",
+        "type": "long"
+      },
+      {
+        "name": "status",
+        "type": {
+          "name": "ShippingStatus",
+          "type": "enum",
+          "symbols": [
+            "ACCEPTED",
+            "CANCELED"
+          ]
+        }
+      },
+      {
+        "name": "created_at",
+        "type": [
+          "null",
+          {
+            "type": "long",
+            "logicalType": "timestamp-millis"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ShippingCreatedEvent",
+    "namespace": "com.xabe.avro.v1",
+    "type": "record",
+    "fields": [
+      {
+        "name": "shipping",
+        "type": "Shipping"
+      },
+      {
+        "name": "operation_status",
+        "type": "ShippingOperationStatus"
+      },
+      {
+        "name": "updated_at",
+        "type": [
+          "null",
+          {
+            "type": "long",
+            "logicalType": "timestamp-millis"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ShippingCreateCommand",
+    "namespace": "com.xabe.avro.v1",
+    "type": "record",
+    "fields": [
+      {
+        "name": "purchase_id",
+        "type": "string"
+      },
+      {
+        "name": "user_id",
+        "type": "string"
+      },
+      {
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "name": "price",
+        "type": "long"
+      },
+      {
+        "name": "sent_at",
+        "type": [
+          "null",
+          {
+            "type": "long",
+            "logicalType": "timestamp-millis"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "name": "MessageEnvelopePayment",
+  "namespace": "com.xabe.avro.v1",
+  "subject": "payments.v1-value",
+  "type": "record",
+  "fields": [
+    {
+      "name": "metadata",
+      "type": "com.xabe.avro.v1.Metadata",
+      "doc": "PIPE specific metadata."
+    },
+    {
+      "name": "payload",
+      "doc": "Envelope's content. It could be any Payment command.",
+      "type": [
+        "PaymentCreateCommand"]
+    }
+  ]
+}
