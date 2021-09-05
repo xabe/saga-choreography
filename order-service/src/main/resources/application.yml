@@ -18,7 +18,7 @@ quarkus:
       - "-H:ResourceConfigurationFiles=resources-config.json"
       - "-H:ReflectionConfigurationFiles=reflection-config.json"
   package:
-    main-class: com.xabe.orchestration.order.App
+    main-class: com.xabe.choreography.order.App
   log:
     console:
       enable: true

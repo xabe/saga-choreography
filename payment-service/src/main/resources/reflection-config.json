@@ -108,15 +108,6 @@
     "allPublicFields": true
   },
   {
-    "name": "com.xabe.avro.v1.MessageEnvelopeOrder",
-    "allDeclaredConstructors": true,
-    "allPublicConstructors": true,
-    "allDeclaredMethods": true,
-    "allPublicMethods": true,
-    "allDeclaredFields": true,
-    "allPublicFields": true
-  },
-  {
     "name": "com.xabe.avro.v1.MessageEnvelopePayment",
     "allDeclaredConstructors": true,
     "allPublicConstructors": true,

@@ -1,6 +1,6 @@
-## Patrón saga con orquestación
+## Patrón saga con coreografía
 
-En este ejemplo se ha desarrollado un ejemplo de patrón saga con orquestación como se muestra en la imagen:
+En este ejemplo se ha desarrollado un ejemplo de patrón saga con coreografía como se muestra en la imagen:
 
 ![Diagrama](./images/diagrama.png)
 
